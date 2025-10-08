@@ -4,22 +4,22 @@ Extends the functionality of the HP67 vintage calculator
 
 ## Description
 
-This repository contains extended firmwares for the vintage calculator HP67
-from the late 1970s.
+This repository contains extended firmware for the vintage calculator HP67
+from the late 1970's.
  
 Unfortunately, this old calculator can not be re-flashed, so the firmware must be 
 executed on HP67 simulators/emulators, for example the **x11-calc** simulator, by mike632t, 
 which can be found found [here](https://github.com/mike632t/x11-calc)
 
-The x11-calc-67 simulator can use the firmware directly by using the ROM switch (-r).
+The x11-calc-67 simulator can use the firmware directly, using the ROM switch (-r).
 
 
 ## Features
 
-- Extends the number of registers
+- Extends the number of storage registers
 - Extends the number of program steps
 - Adds new functionality so that the X-register can be used as a second indirect register
-- Adds support to read and write up to 4 card sides (2 cards) to be able to read/write large programs.
+- Adds support to read and write up to 4 card sides (2 cards) to be able to read/write large programs
 
 
 ### Indirect use of the X-register 
@@ -44,7 +44,7 @@ When **GTO** **EEX** is executed, and the value in the X-register is positive 0-
 
 When **GTO** **EEX** is executed, and the value in the X-register is a negative number between -1 and -999, execution transfers back in program memory the number of steps specified by the negative number in the X-register.
 
-#### Limitaions
+#### Limitations
 
 - GSB (x) is not supported.
 - Storage register arithmetic, eg. STO + (x), is not supported.
@@ -61,7 +61,7 @@ The firmware versions with 448 or 896 program steps can read/write up to 4 card 
 
 ## Versions
 
-### HP67-extended-26-224.rom
+### HP67-ext-26-224.rom
 
 Has the standard number of registers and program steps, but implements the indirect X-register functions.
 
@@ -69,7 +69,7 @@ Has the standard number of registers and program steps, but implements the indir
 - 224 program steps (Standard HP-67)
 - RCL (x), STO (x), GTO (x)
 
-### HP67-extended-101-448.rom
+### HP67-ext-101-448.rom
 
 Extends the number of registers and doubles the program steps.
 
@@ -78,7 +78,7 @@ Extends the number of registers and doubles the program steps.
 - RCL (x), STO (x), GTO (x)
 - 2-cards, 4-side support
 
-### HP67-extended-101-896.rom
+### HP67-ext-101-896.rom
 
 Extends the number of registers and quadruples the program steps.
 
@@ -90,7 +90,7 @@ Extends the number of registers and quadruples the program steps.
 
 ## Usage
 
-To start **x11-calc-67*** using the 101 register, 448 program step firmware do:
+To start **x11-calc-67** using the 101 register, 448 program step firmware, do:
 ```
 x11-calc-67 -r hp67-extended-101-448.rom
 ```
