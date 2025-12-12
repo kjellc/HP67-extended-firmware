@@ -16,8 +16,8 @@ The x11-calc-67 simulator can use the firmware directly, using the ROM switch (-
 
 ## Features
 
-- Extends the number of storage registers
-- Extends the number of program steps
+- Extends the number of storage registers to 101
+- Extends the number of program steps to 448 or 896
 - Adds new functionality so that the X-register can be used as a second indirect register
 - Adds support to read and write up to 4 card sides (2 cards) to be able to read/write large programs
 
@@ -92,5 +92,5 @@ Extends the number of registers and quadruples the program steps.
 
 To start **x11-calc-67** using the 101 register, 448 program step firmware, do:
 ```
-x11-calc-67 -r hp67-extended-101-448.rom
+x11-calc-67 -r hp67-extended-101-448.rom -m 256
 ```
