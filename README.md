@@ -20,6 +20,9 @@ The x11-calc-67 simulator can use the firmware directly, using the ROM switch (-
 - Extends the number of program steps to 448 or 896
 - Adds new functionality so that the X-register can be used as a second indirect register
 - Adds support to read and write up to 4 card sides (2 cards) to be able to read/write large programs
+- When writing cards, the display will prompt the card to write next "crd 2", "crd 3" and so on.
+- (New) When reading cards, the calculator will keep track of cards remaining. For example, if card 2-of-4 
+  is read first, the display will prompt "crd 1 34". 
 
 
 ### Indirect use of the X-register 
@@ -54,9 +57,11 @@ When **GTO** **EEX** is executed, and the value in the X-register is a negative 
 The firmware versions with 448 or 896 program steps can read/write up to 4 card sides. This makes it possible to save 448 program steps.
 
 #### Limitations
-- **Requires** an x11-calc-67 version that is **under development** (as of October 6, 2025),
-- Only 448 program steps can be read/written (2 program cards, 4 sides).
+- **Requires** an x11-calc-67 built from the **unsupported** branch (as of February 15, 2026),
 - Only the first 25 registers + I-register can be read/written (1 data card, 2 card sides).
+- Only program steps 001-448 can be saved (2 program cards, 4 sides). However cards can be
+  loaded to steps 449-896 using the merge function of the HP67. Go to step 448 (GTO . 448) and
+  press g-Merge before loading the first card.
 
 
 ## Versions
@@ -85,12 +90,13 @@ Extends the number of registers and quadruples the program steps.
 - 101 registers (0-19, A-E, 25-99, I)  NOTE: Register I = reg# 100
 - 896 program steps
 - RCL (x), STO (x), GTO (x)
-- 2-cards, 4-side support. Note: can not read/save program steps above 448
+- 2-cards, 4-side support. Note: can not save program steps above step 448, but can load programs
+  to steps 449-896 using the Merge function.
 
 
 ## Usage
 
 To start **x11-calc-67** using the 101 register, 448 program step firmware, do:
 ```
-x11-calc-67 -r hp67-extended-101-448.rom -m 256
+x11-calc-67 -r HP67-ext-101-448.rom -m 256
 ```
