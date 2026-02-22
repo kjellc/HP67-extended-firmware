@@ -19,10 +19,9 @@ The x11-calc-67 simulator can use the firmware directly, using the ROM switch (-
 - Extends the number of storage registers to 101
 - Extends the number of program steps to 448 or 896
 - Adds new functionality so that the X-register can be used as a second indirect register
-- Adds support to read and write up to 4 card sides (2 cards) to be able to read/write large programs
+- Adds support to read and write up to 4 cards to be able to read/write large programs
 - When writing cards, the display will prompt the card to write next "crd 2", "crd 3" and so on.
-- (New) When reading cards, the calculator will keep track of cards remaining. For example, if card 2-of-4 
-  is read first, the display will prompt "crd 1 34". 
+- (New) When reading cards, the calculator will keep track of cards remaining. For example, if card 2-of-4 is read first, the display will prompt "crd 1 34". 
 
 
 ### Indirect use of the X-register 
@@ -43,7 +42,7 @@ This makes it easy to store a value in of the new registers. For example to stor
 
 #### GTO (x)
 
-When **GTO** **EEX** is executed, and the value in the X-register is positive 0-19, execution transfers to the next label specified by the number in the X-register. For example, 0=LBL 0, 9=LBL 9, 10=LBL A, 19=LBL e.
+When **GTO** **EEX** is executed, and the value in the X-register is positive 0-19, execution transfers to the next label specified by the number in the X-register. For example, 0=LBL 0, 9=LBL 9, 10=LBL A, 14=LBL E, 19=LBL e.
 
 When **GTO** **EEX** is executed, and the value in the X-register is a negative number between -1 and -999, execution transfers back in program memory the number of steps specified by the negative number in the X-register.
 
@@ -54,14 +53,15 @@ When **GTO** **EEX** is executed, and the value in the X-register is a negative 
 
 ### Multi card support
 
-The firmware versions with 448 or 896 program steps can read/write up to 4 card sides. This makes it possible to save 448 program steps.
+The firmware versions with 448 or 896 program steps can read/write up to 4 cards. This makes it possible to save 448 program steps.
 
-#### Limitations
+#### Limitations / Functional changes
 - **Requires** an x11-calc-67 built from the **unsupported** branch (as of February 15, 2026),
-- Only the first 25 registers + I-register can be read/written (1 data card, 2 card sides).
-- Only program steps 001-448 can be saved (2 program cards, 4 sides). However cards can be
-  loaded to steps 449-896 using the merge function of the HP67. Go to step 448 (GTO . 448) and
-  press g-Merge before loading the first card.
+- Only the first 25 registers + I-register can be read/written (maximum 2 data cards).
+- Only program steps 001-448 can be saved (4 cards). However cards can be loaded to steps 449-896 using the merge function of the HP67. Go to step 448 (GTO . 448) and press g-Merge before loading the first card.
+- Single card programs (1 of 1) will erase step 113-224 when loaded, just like the standard firmware. However, programs with 2 or 3 cards will not erase the remaining program steps (224-448 or 336-448).
+- After a read error, unlike the standard firmware, the corresponding program steps will **not** be erased. This may result in bad instructions remaining in the program memory.
+- Clear Registers **CL REG** will clear registers 0-9, A-E, I and 25-99. Registers 10-19 will not be cleared.
 
 
 ## Versions
@@ -73,6 +73,7 @@ Has the standard number of registers and program steps, but implements the indir
 - 26 registers (0-19, A-E, I)  Register I = reg# 25 (Standard HP67)
 - 224 program steps (Standard HP-67)
 - RCL (x), STO (x), GTO (x)
+- Supports 2-cards, same as the standard firmware.
 
 ### HP67-ext-101-448.rom
 
@@ -81,7 +82,7 @@ Extends the number of registers and doubles the program steps.
 - 101 registers (0-19, A-E, 25-99, I)  NOTE: Register I = reg# 100
 - 448 program steps
 - RCL (x), STO (x), GTO (x)
-- 2-cards, 4-side support
+- Supports 4-cards.
 
 ### HP67-ext-101-896.rom
 
@@ -90,7 +91,7 @@ Extends the number of registers and quadruples the program steps.
 - 101 registers (0-19, A-E, 25-99, I)  NOTE: Register I = reg# 100
 - 896 program steps
 - RCL (x), STO (x), GTO (x)
-- 2-cards, 4-side support. Note: can not save program steps above step 448, but can load programs
+- Supports 4-cards. Note: can not save program steps above step 448, but can load programs
   to steps 449-896 using the Merge function.
 
 
